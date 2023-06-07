@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>		
+		<link href="mysite.css?<?php echo time()?>" rel="stylesheet">
+	</head>
+	<body>
+		<?php
+			include "db.php";
+			// style="background-color: RGB(<?php echo isset($_POST['poisk']) ? 90 : 190 ? >, 230, 230)"
+		
+			//if( isset( $_POST['poisk'] ) )    
+			//	echo $_SERVER["REQUEST_URI"] . '==========';
+			
+			$link = connect();
+		?>	
+		<script>
+			document.write(Date());
+			document.write();
+			document.write(<?php echo $a1 ?>);
+		</script>
+		<div class='outer'>
+			<div class='outer'>			
+				<div class='inner'>
+					<form method="POST"> 
+						<h2>Справочник по договорам</h2>
+						<!-- <a href='https://ospanel.io/docs/' class='button' id='t3'>Руководство пользователя <i class="right"></i></a> -->
+						<text>_____________________</text> 
+						<button name="filter" <?php echo isset($_POST['poisk']) ? 'disabled' : '' ?>> Фильтр по документам </button>
+						
+						<h2 />
+						<text>_____________________</text> 
+						<button name='poisk' <?php echo isset($_POST['filter']) ? 'disabled' : '' ?>> Поиск </button>						
+
+						<h2 />
+						<text>_____________________</text> 
+						<button> Новый документ </button>
+
+						<h2 />
+						<text>_____________________</text> 
+						<button> Сохранить изменения </button>
+
+						<h2 />
+						<text>_____________________</text> 
+						<button> Настройки </button>
+					</form> 
+				</div>
+			</div>
+		</div>	
+		
+		<div class="prokrutka">
+			<?php					
+				# Если кнопка нажата
+				//var_dump($_POST);
+				if( isset( $_POST['poisk'] ) )    {		
+					if( $result = $link->query("SELECT * FROM my.my_dict")){						
+						list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"], $options = ['bordercolor'=>'green', 'border'=>1]);
+
+					$result->free();
+					} else{
+						echo "Ошибка: " . $link->error;
+					}						
+				}
+			?>
+		</div>
+	</body>
+</html>
