@@ -1,11 +1,40 @@
 body {	
 	background-color: RGB(230, 230, 230);
 }
-.prokrutka {
-	overflow: auto;
+.scroll {
+/*	overflow: auto;
 	width:950px;
-	height:600px;
+	height:600px; */
 }
-table {
-	background-color: RGB(220, 230, 230);			
+ .scroll table{
+	background-color: RGB(220, 230, 330);			
+}
+
+
+
+.scroll-table table {
+	width:100%;
+	table-layout: fixed;
+	border: none;
+}
+.scroll-table th {
+	font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	background: #d8d8d8;
+	font-size: 14px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.scroll-table td {
+	text-align: left;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+}
+.scroll-table tr:nth-child(even){
+	background: #f3f3f3;
 }

@@ -46,11 +46,122 @@
 				</div>
 			</div>
 		</div>	
-		
-		<div class="prokrutka">
+<!--		
+		<div class="scroll-table" style="margin-left: 40px; margin-right: 70px; height: 300px;">
+			<div style="margin-right: 20px">
+				<table>
+					<thead>
+						<tr>
+							<th>Название блюда</th>
+							<th>Белки</th>
+							<th>Жиры</th>
+							<th>Углеводы</th>
+							<th>Ккал</th>
+						</tr>
+					</thead>
+				</table>	
+			</div>
+			<div contenteditable style="overflow-x: auto; height: 100%;">
+				<table>						
+					<tbody>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+						<tr>
+							<td>Азу</td>
+							<td>11,9</td>
+							<td>14,2</td>
+							<td>10,2</td>
+							<td>214</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+-->				
+		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 300px;">
 			<?php					
-				# Если кнопка нажата
-				//var_dump($_POST);
 				if( isset( $_POST['poisk'] ) )    {		
 					if( $result = $link->query("SELECT * FROM my.my_dict")){						
 						list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"], $options = ['bordercolor'=>'green', 'border'=>1]);
