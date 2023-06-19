@@ -1,17 +1,12 @@
 body {	
 	background-color: RGB(230, 230, 230);
 }
-.scroll {
-/*	overflow: auto;
-	width:950px;
-	height:600px; */
-}
- .scroll table{
-	background-color: RGB(220, 230, 330);			
+.scroll table {
+	background-color: RGB(220, 230, 230);
 }
 
 
-
+/*
 .scroll-table table {
 	width:100%;
 	table-layout: fixed;
@@ -38,3 +33,4 @@ body {
 .scroll-table tr:nth-child(even){
 	background: #f3f3f3;
 }
+*/

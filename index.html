@@ -46,7 +46,7 @@
 				</div>
 			</div>
 		</div>	
-<!--		
+<!--
 		<div class="scroll-table" style="margin-left: 40px; margin-right: 70px; height: 300px;">
 			<div style="margin-right: 20px">
 				<table>
@@ -159,12 +159,14 @@
 				</table>
 			</div>			
 		</div>
--->				
-		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 300px;">
-			<?php					
-				if( isset( $_POST['poisk'] ) )    {		
+		<?php print_r(tag('h1', 'dsfjoids', ['p'=>'aads', 'a'=>'dewqw'])) ?>	
+-->		
+		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 400px;">
+			
+			<?php
+				if( isset( $_POST['poisk'] ) )    {										
 					if( $result = $link->query("SELECT * FROM my.my_dict")){						
-						list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"], $options = ['bordercolor'=>'green', 'border'=>1]);
+						list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"] /*, $options = ['bordercolor'=>'green', 'border'=>1]*/);
 
 					$result->free();
 					} else{
