@@ -13,13 +13,49 @@
 	}
 
 	$upd_script = "
-		/*alert('=!!=');*/
-		var context = this.textContent.substring(1, this.textContent.length-1);
-		if (context !== this.abbr) {		
-			alert(this.textContent.charCodeAt(0));
-			alert(this.textContent.charCodeAt(this.textContent.length-1));
+
+		//alert('=!!=');
+		//var context = this.textContent.substring(1, this.textContent.length-1);
+		/*var context = this.textContent.replace(*/
+
+		if (innerText !== this.abbr) {
+
+		/*
+			alert('0- ' + this.textContent.charCodeAt(0));
+			alert('1- ' + this.textContent.charCodeAt(1));
+			alert('1-2 - ' + this.textContent.charCodeAt(this.textContent.length-2));
+			alert('1-1 - ' + this.textContent.charCodeAt(this.textContent.length-1));
+			alert('1 - ' + this.textContent.charCodeAt(this.textContent.length));
 			alert(this.textContent.charCodeAt(this.textContent.length-2));
-			alert(this.id + '\\n' + '|' + context + '|' + '\\n' + '|' + this.abbr + '|');
+		*/
+
+			alert(this.id + '|innerText=' + this.innerText + '|outerText=' + this.outerText + '|abbr=' + this.abbr + '|');
+
+		/*
+			fetch('update.php', {
+				method: 'POST',
+				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+				body: '111'
+			}).then(response => response.text());
+
+			$.ajax({
+				type: 'POST',
+				url: 'update.php',
+				data: { var: 'var', var2: 'var2' },
+				error: function() {
+					alert('error')
+				}
+			}).done(function(data) { $('#dishes').html(data); });
+		*/
+
+			fetch('update.php', {
+				method: 'POST',
+				headers: {
+				  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+				},
+				body: 'id=' + this.id + '&value=' + this.innerText
+			})
+
 			/*alert('=!!=');
 			alert('=2=');*/
 		}
