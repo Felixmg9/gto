@@ -18,7 +18,7 @@
 		//var context = this.textContent.substring(1, this.textContent.length-1);
 		/*var context = this.textContent.replace(*/
 
-		if (innerText !== this.abbr) {
+		if (this.innerText !== this.abbr) {
 
 		/*
 			alert('0- ' + this.textContent.charCodeAt(0));
@@ -29,7 +29,7 @@
 			alert(this.textContent.charCodeAt(this.textContent.length-2));
 		*/
 
-			alert(this.id + '|innerText=' + this.innerText + '|outerText=' + this.outerText + '|abbr=' + this.abbr + '|');
+		//	alert(this.id + '|innerText=' + this.innerText + '|outerText=' + this.outerText + '|abbr=' + this.abbr + '|');
 
 		/*
 			fetch('update.php', {
@@ -54,8 +54,9 @@
 				  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 				},
 				body: 'id=' + this.id + '&value=' + this.innerText
-			})
-
+			});
+			location.reload();
+			
 			/*alert('=!!=');
 			alert('=2=');*/
 		}
@@ -82,7 +83,9 @@
 		foreach($result as $row) {
 			$td = '';
 			foreach ($cols as $value) { $td = $td . PHP_EOL . tag('td', $row[$value],
-				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>$GLOBALS['upd_script']]
+//				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>$GLOBALS['upd_script']]
+//				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>'update(this, $value)']
+				['contenteditable'=>'true', 'onblur'=>sprintf("update(this, %s, %s, %s)", $row["Номер"], $value, $row[$value])]
 			); };
 			$tbody = $tbody . PHP_EOL . tag('tr', $td);
 		}
