@@ -64,7 +64,12 @@
 
 	function tag($tag, $block, $params = [])
 	{	$open_tag = $tag;
-		foreach ($params as $key => $value) {$open_tag = $open_tag . ' ' . $key . '="' . $value . '"'; };
+		foreach ($params as $key => $value) {
+			$open_tag = $open_tag . ' ' . $key;
+			if ($value)	{
+				$open_tag = $open_tag . '="' . $value . '"'; 
+			}
+		};
 		return '<' . $open_tag . '>' . PHP_EOL  . $block . PHP_EOL . '</' . $tag . '>';
 	};
 
@@ -85,7 +90,9 @@
 			foreach ($cols as $value) { $td = $td . PHP_EOL . tag('td', $row[$value],
 //				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>$GLOBALS['upd_script']]
 //				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>'update(this, $value)']
-				['contenteditable'=>'true', 'onblur'=>sprintf("update(this, %s, %s, %s)", $row["Номер"], $value, $row[$value])]
+				['contenteditable'=>'', 'onblur'=>sprintf("update(this, '%s', '%s', '%s')", $row["Номер"], $value, $row[$value]),
+					'onkeydown'=>"checkForEnter(event)"
+				]
 			); };
 			$tbody = $tbody . PHP_EOL . tag('tr', $td);
 		}

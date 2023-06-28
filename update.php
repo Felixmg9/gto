@@ -13,9 +13,12 @@ fwrite($fd, $_POST['id'] . ' | ' . $_POST['value']);
 require 'db.php';
 $link = connect();
 //$sql = "UPDATE my.my_dict SET `Предмет договора` = CONCAT(`Предмет договора`, '" . $_POST['value'] . "') WHERE `Номер` = '94' ";
-$sql = sprintf("UPDATE my.my_dict SET `Предмет договора` = '%s' WHERE `Номер` = '%d' ", $_POST['value'], $_POST['id']);
-if ($link->query($sql)) {
-	fwrite($fd, PHP_EOL . 'ERROR - ' . $sql);
-}	
+$sql = 'UPDATE my.my_dict SET `%s` = \'%s\' WHERE `Номер` = \'%d\' ';
+$sql = sprintf($sql, $_POST['field'], $_POST['value'], $_POST['id']);
+if (!$link->query($sql)) {
+	fwrite($fd, PHP_EOL . 'ERROR - ');
+}
+fwrite($fd, $sql);
 fclose($fd);
+exit('xxx');
 ?>

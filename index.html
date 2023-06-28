@@ -162,6 +162,16 @@
 		</div>
 		<?php print_r(tag('h1', 'dsfjoids', ['p'=>'aads', 'a'=>'dewqw'])) ?>	
 -->		
+		<script>
+			(function() {
+				document.querySelector('td').addEventListener('keydown', function(e) {
+					if (e.keyCode === 13) {
+						// можете делать все что угодно со значением текстового поля
+						alert(this.value);
+					}
+				});
+			})();
+		</script>
 		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 400px;">
 			
 			<?php
