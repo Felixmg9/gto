@@ -1,67 +1,28 @@
 <?php
-	function connect() {
+	$db_params = [];
 
-		$link = mysqli_connect("localhost", "root", "root");
+	function read_ini() {
+		global $db_params;
+		$ini_file_name = end(explode('\\', getcwd())) . '.ini';
+		$ini_file = fopen($ini_file_name, 'r');				
+		$db_params = json_decode(fread($ini_file, filesize($ini_file_name)));				
+		//print_r($db_params);
+	}	
+
+	function connect() {
+		global $db_params;
+		read_ini();
+		$link = mysqli_connect($db_params->host, $db_params->username, $db_params->pwd);
 
 		if ($link == false){
 			print("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
 		}
 		else {
-			$link->query("SET NAMES utf8");
+			$link->query("SET NAMES utf8");			
 		}
 		return $link;
 	}
-
-	$upd_script = "
-
-		//alert('=!!=');
-		//var context = this.textContent.substring(1, this.textContent.length-1);
-		/*var context = this.textContent.replace(*/
-
-		if (this.innerText !== this.abbr) {
-
-		/*
-			alert('0- ' + this.textContent.charCodeAt(0));
-			alert('1- ' + this.textContent.charCodeAt(1));
-			alert('1-2 - ' + this.textContent.charCodeAt(this.textContent.length-2));
-			alert('1-1 - ' + this.textContent.charCodeAt(this.textContent.length-1));
-			alert('1 - ' + this.textContent.charCodeAt(this.textContent.length));
-			alert(this.textContent.charCodeAt(this.textContent.length-2));
-		*/
-
-		//	alert(this.id + '|innerText=' + this.innerText + '|outerText=' + this.outerText + '|abbr=' + this.abbr + '|');
-
-		/*
-			fetch('update.php', {
-				method: 'POST',
-				headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-				body: '111'
-			}).then(response => response.text());
-
-			$.ajax({
-				type: 'POST',
-				url: 'update.php',
-				data: { var: 'var', var2: 'var2' },
-				error: function() {
-					alert('error')
-				}
-			}).done(function(data) { $('#dishes').html(data); });
-		*/
-
-			fetch('update.php', {
-				method: 'POST',
-				headers: {
-				  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-				},
-				body: 'id=' + this.id + '&value=' + this.innerText
-			});
-			location.reload();
-			
-			/*alert('=!!=');
-			alert('=2=');*/
-		}
-	";
-
+	
 	function tag($tag, $block, $params = [])
 	{	$open_tag = $tag;
 		foreach ($params as $key => $value) {
@@ -73,12 +34,12 @@
 		return '<' . $open_tag . '>' . PHP_EOL  . $block . PHP_EOL . '</' . $tag . '>';
 	};
 
-	function list_query($result, $cols, $a_ops = []) {
+	function list_query($result, $cols, $a_ops = []) {  //----------------------------------------------------
 		$options = ['border'=>1, 'style'=>'table-layout: fixed; width:100%;' ];
 		foreach ($a_ops as $key => $value) { $options[$key] = $value; };
 
 		$thead = '';
-		foreach ($cols as $value) { $thead = $thead . PHP_EOL . tag('th', $value); };
+		foreach ($cols as $value=>$type) { $thead = $thead . PHP_EOL . tag('th', $value); };
 		$thead = tag('tr', $thead);
 		$thead = tag('thead', $thead);
 		$thead = tag('table', $thead, $options);
@@ -87,13 +48,21 @@
 		$tbody = '';
 		foreach($result as $row) {
 			$td = '';
-			foreach ($cols as $value) { $td = $td . PHP_EOL . tag('td', $row[$value],
-//				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>$GLOBALS['upd_script']]
-//				['contenteditable'=>'true', 'id'=>$row["Номер"], 'abbr'=>$row[$value], 'onblur'=>'update(this, $value)']
-				['contenteditable'=>'', 'onblur'=>sprintf("update(this, '%s', '%s', '%s')", $row["Номер"], $value, $row[$value]),
-					'onkeydown'=>"checkForEnter(event)"
-				]
-			); };
+			
+			foreach ($cols as $value) { 
+				
+				if ($type !== 'text') {
+					$row[$value] = $row[$value] . '|';
+					$opt = [];
+				}
+				else {
+					//print_r($row);
+					//print_r("\n\n");
+					$opt = ['contenteditable'=>'', 'onblur'=>sprintf("update(this, '%s', '%s', '%s')", $row['id'], $value, $row[$value]),
+						'onkeydown'=>"checkForEnter(event)"];				
+				}
+				$td = $td . PHP_EOL . tag('td', $row[$value], $opt);			
+			}
 			$tbody = $tbody . PHP_EOL . tag('tr', $td);
 		}
 		$tbody = tag('tbody', $tbody);
@@ -117,6 +86,20 @@
 			echo "</tr>";
 		}
 		echo '</table></tbody></div></div>';*/
+	}
+	
+	function new_record() {  // ---------------------------------------------		
+		$tag = '';		
+		read_ini();
+		echo 111;
+		global $db_params;
+		//print_r($db_params);
+		//print_r($db_params->columns);
+		foreach ($db_params->columns as $field=>$type) {
+			//print_r(tag('text', $field) . tag('input', '') . '<br>');
+			$tag = $tag . tag('text', $field) . tag('input', '', ['style'=>'margin-right: 10px']) . '<br>';
+		}		
+		echo tag('dialog', $tag, ['id'=>'newDoc']);
 	}
 	
 	// var s; for (var key in document.activeElement) { s += key + \'\\n\'; };  document.write(s+\'\\n\');

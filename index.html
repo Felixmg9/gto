@@ -1,190 +1,55 @@
 <!DOCTYPE html>
 <html>
-	<head>		
+	<head>
 		<link href="mysite.css?<?php echo time()?>" rel="stylesheet">
 		<script src="update.js"> </script>
 	</head>
 	<body>
 		<?php
-			include "db.php";			
-			// style="background-color: RGB(<?php echo isset($_POST['poisk']) ? 90 : 190 ? >, 230, 230)"
-		
-			//if( isset( $_POST['poisk'] ) )    
-			//	echo $_SERVER["REQUEST_URI"] . '==========';
-			
+			include "db.php";
 			$link = connect();
-		?>	
+		?>
 		<script>
 			document.write(Date());
-			document.write();
-			document.write(<?php echo $a1 ?>);
 		</script>
-		<div class='outer'>
-			<div class='outer'>			
-				<div class='inner'>
-					<form method="POST"> 
-						<h2>Справочник по договорам</h2>
-						<!-- <a href='https://ospanel.io/docs/' class='button' id='t3'>Руководство пользователя <i class="right"></i></a> -->
-						<text>_____________________</text> 
-						<button name="filter" <?php echo isset($_POST['poisk']) ? 'disabled' : '' ?>> Фильтр по документам </button>
-						
-						<h2 />
-						<text>_____________________</text> 
-						<button name='poisk' <?php echo isset($_POST['filter']) ? 'disabled' : '' ?>> Поиск </button>						
 
-						<h2 />
-						<text>_____________________</text> 
-						<button> Новый документ </button>
+		<form method="POST" style="margin-left: 180px">
+			<h2>Справочник по договорам</h2>
+			<button name="filter" <?php echo isset($_POST['poisk']) ? 'disabled' : '' ?>> Фильтр по документам </button> <br> <br>
+			<button name='poisk' <?php echo isset($_POST['filter']) ? 'disabled' : '' ?>> Поиск </button> <br> <br>
+			<button name='new_doc'> Новый документ </button> <br> <br>
+			<button> Сохранить изменения </button> <br> <br>
+			<button> Настройки </button> <br> <br>
+		</form>
 
-						<h2 />
-						<text>_____________________</text> 
-						<button> Сохранить изменения </button>
-
-						<h2 />
-						<text>_____________________</text> 
-						<button> Настройки </button>
-					</form> 
-				</div>
-			</div>
-		</div>	
-<!--
-		<div class="scroll-table" style="margin-left: 40px; margin-right: 70px; height: 300px;">
-			<div style="margin-right: 20px">
-				<table>
-					<thead>
-						<tr>
-							<th>Название блюда</th>
-							<th>Белки</th>
-							<th>Жиры</th>
-							<th>Углеводы</th>
-							<th>Ккал</th>
-						</tr>
-					</thead>
-				</table>	
-			</div>
-			<div contenteditable style="overflow-x: auto; height: 100%;">
-				<table>						
-					<tbody>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-						<tr>
-							<td>Азу</td>
-							<td>11,9</td>
-							<td>14,2</td>
-							<td>10,2</td>
-							<td>214</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>			
-		</div>
-		<?php print_r(tag('h1', 'dsfjoids', ['p'=>'aads', 'a'=>'dewqw'])) ?>	
--->		
 		<script>
 			(function() {
 				document.querySelector('td').addEventListener('keydown', function(e) {
 					if (e.keyCode === 13) {
-						// можете делать все что угодно со значением текстового поля
 						alert(this.value);
 					}
 				});
 			})();
 		</script>
-		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 400px;">
-			
-			<?php
-				if( isset( $_POST['poisk'] ) )    {										
-					if( $result = $link->query("SELECT * FROM my.my_dict")){						
-						list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"] /*, $options = ['bordercolor'=>'green', 'border'=>1]*/);
 
+		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 400px;">
+			<?php
+				if( isset( $_POST['poisk'] ) ) {
+					if( $result = $link->query(sprintf("SELECT * FROM %s.%s", $db_params->scheme, $db_params->db_view))) {
+						//list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"] /*, $options = ['bordercolor'=>'green', 'border'=>1]*/);
+						list_query($result, $db_params->columns);
 					$result->free();
-					} else{
+					} else {
 						echo "Ошибка: " . $link->error;
-					}						
+					}
+				}
+				if( isset( $_POST['new_doc'] ) ) {
+					new_record();
 				}
 			?>
 		</div>
+		<script>		
+			document.getElementById("newDoc").showModal();
+		</script>
 	</body>
 </html>
