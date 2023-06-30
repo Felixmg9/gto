@@ -6,7 +6,7 @@
 		$ini_file_name = end(explode('\\', getcwd())) . '.ini';
 		$ini_file = fopen($ini_file_name, 'r');				
 		$db_params = json_decode(fread($ini_file, filesize($ini_file_name)));				
-		//print_r($db_params);
+		print_r($db_params);
 	}	
 
 	function connect() {
@@ -39,7 +39,7 @@
 		foreach ($a_ops as $key => $value) { $options[$key] = $value; };
 
 		$thead = '';
-		foreach ($cols as $value=>$type) { $thead = $thead . PHP_EOL . tag('th', $value); };
+		foreach ($cols as $value => $type) { $thead = $thead . PHP_EOL . tag('th', $value); };
 		$thead = tag('tr', $thead);
 		$thead = tag('thead', $thead);
 		$thead = tag('table', $thead, $options);
@@ -49,7 +49,7 @@
 		foreach($result as $row) {
 			$td = '';
 			
-			foreach ($cols as $value) { 
+			foreach ($cols as $value => $type) { 
 				
 				if ($type !== 'text') {
 					$row[$value] = $row[$value] . '|';
