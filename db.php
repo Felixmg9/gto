@@ -6,7 +6,7 @@
 		$ini_file_name = end(explode('\\', getcwd())) . '.ini';
 		$ini_file = fopen($ini_file_name, 'r');				
 		$db_params = json_decode(fread($ini_file, filesize($ini_file_name)));				
-		print_r($db_params);
+		//print_r($db_params);
 	}	
 
 	function connect() {
@@ -87,19 +87,22 @@
 		}
 		echo '</table></tbody></div></div>';*/
 	}
-	
+		
 	function new_record() {  // ---------------------------------------------		
-		$tag = '';		
-		read_ini();
-		echo 111;
+		$tags = ['',''];
+		read_ini();		
 		global $db_params;
-		//print_r($db_params);
-		//print_r($db_params->columns);
-		foreach ($db_params->columns as $field=>$type) {
-			//print_r(tag('text', $field) . tag('input', '') . '<br>');
-			$tag = $tag . tag('text', $field) . tag('input', '', ['style'=>'margin-right: 10px']) . '<br>';
-		}		
-		echo tag('dialog', $tag, ['id'=>'newDoc']);
+			
+		foreach ($tags as $n=>$s) {
+			foreach ($db_params->columns as $field=>$type) {
+				$tags[$n] .= tag($n==0 ? 'text' : 'input', $n==0 ? $field : '', 
+					['style'=>'margin-left: 10px; margin-right: 10px']) . '<br>' . '<br>';
+			}
+			$tags[$n] = tag('div', $tags[$n], ['style'=>'float:left']);
+		};
+		$tags[0] .= $tags[1] . '<br>' . tag('button', 'поиск', ['name'=>'поиск']);
+		echo tag('dialog', $tags[0], ['id'=>'newDoc']);		
+		echo tag('script', 'document.getElementById("newDoc").showModal();');
 	}
 	
 	// var s; for (var key in document.activeElement) { s += key + \'\\n\'; };  document.write(s+\'\\n\');
