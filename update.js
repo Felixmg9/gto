@@ -21,3 +21,7 @@ function checkForEnter(e) {
 		e.currentTarget.blur();
 	}
 }
+
+function new_doc() {
+	alert('new_doc');
+}

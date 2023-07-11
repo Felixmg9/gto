@@ -8,11 +8,18 @@ function mb_str_pad($str, $len, $delimiter = ' ') {
 
 
 	include 'db.php';
-/*	connect();
-	die();
-*/	
-	$tags = ['',''];
-	read_ini();	
+	//connect();
+	//echo $_POST['name']; 
+	if( $result = $link->query(sprintf("SELECT * FROM %s.%s", $db_params->scheme, $db_params->db_view))) {
+			//list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"] /*, $options = ['bordercolor'=>'green', 'border'=>1]*/);
+			list_query($result, $db_params->columns);
+		$result->free();
+		} else {
+			echo "Ошибка: " . $link->error;
+		}
+	exit();
+	
+	//read_ini();	
 	foreach ($tags as $n=>$s) {
 		foreach ($db_params->columns as $field=>$type) {
 			//$p = [['text', $field], ['input', '']];

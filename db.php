@@ -1,5 +1,6 @@
 <?php
 	$db_params = [];
+	$link = connect();
 
 	function read_ini() {
 		global $db_params;
@@ -87,8 +88,25 @@
 		}
 		echo '</table></tbody></div></div>';*/
 	}
+	
+	function new_record() {  // ---------------------------------------------				
+		//read_ini();		
+		global $db_params;
 		
-	function new_record() {  // ---------------------------------------------		
+		$tag = '';	
+		foreach ($db_params->columns as $field=>$type) {
+			$tag .= tag('text', $field, ['style'=>'margin-left: 10px; margin-right: 10px']) . '<br>';
+			$tag .= tag('input', '', ['style'=>'margin-left: 10px; margin-right: 10px']) . '<br>' . '<br>';
+		};
+		$tag .= '<br>' . tag('button', 'поиск', ['name'=>'поиск', 'type'=>'submit', 'formaction'=>'a()']);
+		//$tag .= '<br>' . tag('input', 'поиск', ['name'=>'поиск', 'type'=>'button', 'onclick'=>'a()']);
+		//echo tag('dialog', $tag, ['id'=>'newDoc', 'onSubmit'=>'alert(!)']);		
+		echo tag('dialog', $tag, ['id'=>'newDoc']);
+		echo tag('script', 'document.getElementById("newDoc").showModal();');
+	}
+		
+		
+	/*function new_record() {  // ---------------------------------------------		
 		$tags = ['',''];
 		read_ini();		
 		global $db_params;
@@ -103,7 +121,7 @@
 		$tags[0] .= $tags[1] . '<br>' . tag('button', 'поиск', ['name'=>'поиск']);
 		echo tag('dialog', $tags[0], ['id'=>'newDoc']);		
 		echo tag('script', 'document.getElementById("newDoc").showModal();');
-	}
+	}*/
 	
 	// var s; for (var key in document.activeElement) { s += key + \'\\n\'; };  document.write(s+\'\\n\');
 	// for (var key in document.activeElement) { if (document.activeElement[key] !== undefined) document.write(key + \' - (\' + document.activeElement[key]) + document.writeln(\'\n)    ---    \'); alert(document.activeElement.text())};

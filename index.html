@@ -7,7 +7,7 @@
 	<body>
 		<?php
 			include "db.php";
-			$link = connect();
+			//$link = connect();
 		?>
 		<script>
 			document.write(Date());
@@ -34,9 +34,10 @@
 
 		<div class="scroll" style="margin-left: 40px; margin-right: 70px; height: 400px;">
 			<?php
-				if( isset( $_POST['filter'] ) ) {
+				/*if( isset( $_POST['filter'] ) ) {
 					new_record();
-				}
+				}*/
+				echo $_POST['age'];
 				if( isset( $_POST['poisk'] ) ) {
 					if( $result = $link->query(sprintf("SELECT * FROM %s.%s", $db_params->scheme, $db_params->db_view))) {
 						//list_query($result, ["Номер", "Предмет договора", "Дата договора", "Корр./Подписал"] /*, $options = ['bordercolor'=>'green', 'border'=>1]*/);
@@ -52,7 +53,14 @@
 			?>			
 		</div>
 		<script>		
-			document.getElementById("newDoc").showModal();
+			//document.getElementById("newDoc").showModal();
 		</script>
+		
+		<form action="index.html" method="post">
+			<p style='margin-left: 10px; margin-right: 10px'>Ваше имя: <input type="text" name="name" /></p>
+			<p style='margin-left: 10px; margin-right: 10px'>Ваш возраст: <input type="text" name="age" /></p>
+			<p><input type="submit" /></p>
+		</form>
+		
 	</body>
 </html>
